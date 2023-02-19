@@ -1,0 +1,20 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metalyx/weather-app.git"
+  },
+  "keywords": [],
+  "author": "Vitalii Tereshchenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/metalyx/weather-app/issues"
+  },
+  "homepage": "https://github.com/metalyx/weather-app#readme"
+}
