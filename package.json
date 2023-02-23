@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/metalyx/weather-app/issues"
   },
-  "homepage": "https://github.com/metalyx/weather-app#readme"
+  "homepage": "https://github.com/metalyx/weather-app#readme",
+  "dependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
 }
