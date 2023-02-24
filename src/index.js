@@ -1,1 +1,1 @@
-console.log('Test Script');
+import './index.scss';
