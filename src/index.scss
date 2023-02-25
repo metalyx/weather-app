@@ -1,0 +1,91 @@
+.background {
+    background: rgb(24,1,115);
+    background: linear-gradient(325deg, rgba(24,1,115,1) 0%, rgba(226,42,99,1) 100%);
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .weather-container {
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+
+        background-size: cover;
+        background-position: center;
+
+        padding: 4rem 2rem;
+
+        height: 70vh;
+        min-height: 200px;
+
+        border-radius: 15px;
+
+        .upper-container {
+            .title {
+                font-size: 3em;
+                color: white;
+                margin-bottom: 0.5em;
+                font-weight: bold;
+            }
+
+            .search-field {
+                input {
+                    font-size: 1.2em;
+                    padding: 10px 20px;
+                    text-align: center;
+                }
+            }
+
+            .submit-button {
+                width: 100%;
+                margin-top: 10px;
+                font-size: 1.2em;
+                padding: 10px 20px;
+                background-color: #DB6400;
+                color: white;
+                border: none;
+                border-radius: 5px;
+            }
+        }
+
+        .lower-container {
+            width: 100%;
+            margin-top: 30px;
+
+            .location-container {
+                color: white;
+
+                .city-info {
+                    font-size: 1.8em;
+                    text-align: center;
+                    
+                }
+
+                .date-info {
+                    font-size: 1.2em;
+                    text-align: center;
+                }
+            }
+
+            .weather-info {
+                padding-top: 5px;
+                margin-top: 25px;
+                border-top: 2px solid white;
+
+                ul {
+                    color: white;
+
+                    li {
+                        font-size: 1.2em;
+                    }
+                }
+            }
+        }
+    }
+}
