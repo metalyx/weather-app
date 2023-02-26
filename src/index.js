@@ -3,6 +3,7 @@ import './styles/global.scss';
 import './index.scss';
 import weatherContainerBCImage from './assets/weather-bg.jpg';
 import weatherAPI from './api/WeatherAPI';
+import Loader from './components/loader';
 
 const unknown = 'unknown';
 const cityNameRegExp = /^[a-z- ]+$/i;
@@ -12,12 +13,17 @@ setBGForWeatherContainer();
 
 const cityInput = document.getElementById('input-city');
 
+const loader = Loader();
+const loaderDiv = document.getElementById('loader');
+loaderDiv.appendChild(loader);
+
 const temperatureSpan = document.getElementById('temperature');
 const conditionsSpan = document.getElementById('conditions');
 const tempMinSpan = document.getElementById('tempMin');
 const tempMaxSpan = document.getElementById('tempMax');
 const citySpan = document.getElementById('city');
 const countrySpan = document.getElementById('country');
+const lowerContainer = document.getElementById('lower-container');
 
 const dateInfo = document.getElementById('date-info');
 
@@ -46,7 +52,7 @@ async function handleCityInputSubmit(skipValidation = false) {
             return;
         }
     }
-
+    toggleLoading(true);
     const weatherInfo = await weatherAPI.get(cityInput.value || defaultCity);
 
     const weatherData = {
@@ -58,7 +64,7 @@ async function handleCityInputSubmit(skipValidation = false) {
         country: weatherInfo?.sys?.country,
         date: convertDate(weatherInfo?.dt, weatherInfo?.timezone),
     };
-
+    toggleLoading(false);
     renderNewWeatherData(weatherData);
 }
 
@@ -138,4 +144,18 @@ function convertDate(unixTimeStamp, timeZone = 0) {
     let date = unixTimeStamp + timeZone;
     date = new Date(date * 1000).toUTCString();
     return date.slice(0, date.length - 13);
+}
+
+function toggleLoading(isLoading) {
+    if (!lowerContainer) {
+        throw new Error('No lower container was found');
+    }
+
+    if (isLoading) {
+        lowerContainer.style.display = 'none';
+        loaderDiv.style.display = 'block';
+    } else {
+        lowerContainer.style.display = 'block';
+        loaderDiv.style.display = 'none';
+    }
 }
