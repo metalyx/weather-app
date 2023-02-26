@@ -15,20 +15,20 @@
                         Weather App
                     </div>
                     <div class="search-field">
-                        <input type="text" name="city" id="city" placeholder="Search by city name">
+                        <input id="input-city" type="text" name="city" placeholder="Search by city name">
                     </div>
-                    <button class="submit-button">Submit</button>
+                    <button id="submit-button" class="submit-button">Submit</button>
                 </div>
                 <div class="lower-container">
                     <div class="location-container">
-                        <div class="city-info">Seattle, Washington</div>
-                        <div class="date-info">Friday, February 12 2023</div>
+                        <div class="city-info"><span id="city"></span> / <span id="country"></span></div>
+                        <div class="date-info" id="date-info"></div>
                     </div>
                     <div class="weather-info">
                         <ul>
-                            <li>Temp: 80</li>
-                            <li>Weather: Sunny</li>
-                            <li>Temp Range: 77/83</li>
+                            <li>Temp: <span id="temperature"></span></li>
+                            <li>Weather: <span id="conditions"></span></li>
+                            <li>Temp Range: <span id="tempMin"></span> / <span id="tempMax"></span></li>
                         </ul>
                     </div>
                 </div>
