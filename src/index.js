@@ -19,11 +19,6 @@ const tempMaxSpan = document.getElementById('tempMax');
 const citySpan = document.getElementById('city');
 const countrySpan = document.getElementById('country');
 
-const dayOfWeekSpan = document.getElementById('dayOfWeek');
-const monthSpan = document.getElementById('month');
-const daySpan = document.getElementById('day');
-const yearSpan = document.getElementById('year');
-
 const dateInfo = document.getElementById('date-info');
 
 const submitButton = document.getElementById('submit-button');

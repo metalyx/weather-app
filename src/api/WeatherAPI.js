@@ -11,9 +11,13 @@ class WeatherAPI {
             );
         }
 
-        console.log(this.#results, cityName);
+        const currentTime = new Date();
 
-        if (!this.#results[cityName]) {
+        // We haven't yet fetched this city or it's been more than 5 minutes since last api call
+        if (
+            !this.#results[cityName] ||
+            currentTime - this.#results[cityName]?.lastCallTime > 300000
+        ) {
             this.#results[cityName] = await this.#sendAPIRequest(
                 cityName,
                 units
@@ -32,7 +36,13 @@ class WeatherAPI {
                 })
             ).then((res) => res.json());
             const jsonData = await response;
-            return jsonData;
+
+            const resultData = {
+                ...jsonData,
+                lastCallTime: new Date(),
+            };
+
+            return resultData;
         } catch (e) {
             console.error(e);
         }
