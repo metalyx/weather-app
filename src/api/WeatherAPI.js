@@ -35,6 +35,19 @@ class WeatherAPI {
                     units,
                 })
             ).then((res) => res.json());
+
+            if (response.cod == '404') {
+                return {
+                    error: 'No such city was found',
+                    code: 404,
+                };
+            } else if (response.cod >= 500 && response.cod <= 599) {
+                return {
+                    error: 'Server error',
+                    code: response.cod,
+                };
+            }
+
             const jsonData = await response;
 
             const resultData = {
@@ -44,7 +57,10 @@ class WeatherAPI {
 
             return resultData;
         } catch (e) {
-            console.error(e);
+            return {
+                error: 'Internet connection issues...',
+                code: null,
+            };
         }
     }
 

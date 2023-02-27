@@ -1,6 +1,7 @@
 import './styles/reset.scss';
 import './styles/global.scss';
 import './index.scss';
+import './styles/error.scss';
 import weatherContainerBCImage from './assets/weather-bg.jpg';
 import weatherAPI from './api/WeatherAPI';
 import Loader from './components/loader';
@@ -16,6 +17,8 @@ const cityInput = document.getElementById('input-city');
 const loader = Loader();
 const loaderDiv = document.getElementById('loader');
 loaderDiv.appendChild(loader);
+
+const errorDiv = document.getElementById('error');
 
 const temperatureSpan = document.getElementById('temperature');
 const conditionsSpan = document.getElementById('conditions');
@@ -55,17 +58,23 @@ async function handleCityInputSubmit(skipValidation = false) {
     toggleLoading(true);
     const weatherInfo = await weatherAPI.get(cityInput.value || defaultCity);
 
-    const weatherData = {
-        temp: weatherInfo?.main?.temp,
-        weather: weatherInfo?.weather[0]?.main,
-        tempMin: weatherInfo?.main?.temp_min,
-        tempMax: weatherInfo?.main?.temp_max,
-        cityName: weatherInfo?.name,
-        country: weatherInfo?.sys?.country,
-        date: convertDate(weatherInfo?.dt, weatherInfo?.timezone),
-    };
-    toggleLoading(false);
-    renderNewWeatherData(weatherData);
+    if (weatherInfo.error) {
+        toggleLoading(false);
+        toggleError(true, weatherInfo.error);
+    } else {
+        const weatherData = {
+            temp: weatherInfo?.main?.temp,
+            weather: weatherInfo?.weather[0]?.main,
+            tempMin: weatherInfo?.main?.temp_min,
+            tempMax: weatherInfo?.main?.temp_max,
+            cityName: weatherInfo?.name,
+            country: weatherInfo?.sys?.country,
+            date: convertDate(weatherInfo?.dt, weatherInfo?.timezone),
+        };
+        toggleLoading(false);
+        toggleError(false);
+        renderNewWeatherData(weatherData);
+    }
 }
 
 function renderNewWeatherData(newData) {
@@ -157,5 +166,20 @@ function toggleLoading(isLoading) {
     } else {
         lowerContainer.style.display = 'block';
         loaderDiv.style.display = 'none';
+    }
+}
+
+function toggleError(isError, message = 'Error occurred') {
+    if (!lowerContainer) {
+        throw new Error('No lower container was found');
+    }
+
+    if (isError) {
+        lowerContainer.style.display = 'none';
+        errorDiv.style.display = 'block';
+        errorDiv.innerText = message;
+    } else {
+        lowerContainer.style.display = 'block';
+        errorDiv.style.display = 'none';
     }
 }
