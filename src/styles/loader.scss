@@ -10,10 +10,12 @@
     width: 80px;
     height: 80px;
 }
+
 .loader div {
     transform-origin: 40px 40px;
     animation: loader 1.2s linear infinite;
 }
+
 .loader div:after {
     content: ' ';
     display: block;
