@@ -37,6 +37,7 @@
 
         .upper-container {
             .title {
+                text-align: center;
                 font-size: 3em;
                 color: white;
                 margin-bottom: 0.5em;
@@ -44,7 +45,12 @@
             }
 
             .search-field {
+                width: 100%;
+                box-sizing: border-box;
+
                 input {
+                    box-sizing: border-box;
+                    width: 100%;
                     font-size: 1.2em;
                     padding: 10px 20px;
                     text-align: center;

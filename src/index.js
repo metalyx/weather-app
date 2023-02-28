@@ -2,6 +2,7 @@ import './styles/reset.scss';
 import './styles/global.scss';
 import './index.scss';
 import './styles/error.scss';
+import './styles/geo.scss';
 import weatherContainerBCImage from './assets/weather-bg.jpg';
 import weatherAPI from './api/WeatherAPI';
 import Loader from './components/loader';
@@ -33,6 +34,10 @@ const dateInfo = document.getElementById('date-info');
 const submitButton = document.getElementById('submit-button');
 
 submitButton.addEventListener('click', () => handleCityInputSubmit());
+
+const geoButton = document.getElementById('ask-geo');
+
+geoButton.addEventListener('click', () => handleGeoLocation());
 
 function setBGForWeatherContainer() {
     const weatherContainer =
@@ -181,5 +186,54 @@ function toggleError(isError, message = 'Error occurred') {
     } else {
         lowerContainer.style.display = 'block';
         errorDiv.style.display = 'none';
+    }
+}
+
+async function handleGeoLocation() {
+    if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            async (pos) => {
+                const crd = {
+                    lat: pos.coords.latitude,
+                    lon: pos.coords.longitude,
+                };
+
+                toggleLoading(true);
+                const weatherInfo = await weatherAPI.getByCords(
+                    crd,
+                    'imperial'
+                );
+
+                if (weatherInfo.error) {
+                    toggleLoading(false);
+                    toggleError(true, weatherInfo.error);
+                } else {
+                    const weatherData = {
+                        temp: weatherInfo?.main?.temp,
+                        weather: weatherInfo?.weather[0]?.main,
+                        tempMin: weatherInfo?.main?.temp_min,
+                        tempMax: weatherInfo?.main?.temp_max,
+                        cityName: weatherInfo?.name,
+                        country: weatherInfo?.sys?.country,
+                        date: convertDate(
+                            weatherInfo?.dt,
+                            weatherInfo?.timezone
+                        ),
+                    };
+                    toggleLoading(false);
+                    toggleError(false);
+                    renderNewWeatherData(weatherData);
+                }
+            },
+            (err) => {
+                console.warn(err);
+                toggleLoading(false);
+                toggleError(true, err.message);
+            }
+        );
+    } else {
+        console.warn(
+            'There is an error occurred during accessing geolocation...'
+        );
     }
 }
