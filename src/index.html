@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+<body>
+    <div id="root">
+        <div class="background">
+            <div class="weather-container">
+                <div class="upper-container">
+                    <div class="title">
+                        Weather App
+                    </div>
+                    <div class="search-field">
+                        <input id="input-city" type="text" name="city" placeholder="Search by city name">
+                    </div>
+                    <button id="submit-button" class="submit-button">Submit</button>
+                    <button id="ask-geo" class="ask-geo-button">Use my geolocation</button>
+                </div>
+                <div id="error"></div>
+                <div id="loader"></div>
+                <div class="lower-container" id="lower-container">
+                    <div class="location-container">
+                        <div class="city-info"><span id="city"></span> / <span id="country"></span></div>
+                        <div class="date-info" id="date-info"></div>
+                    </div>
+                    <div class="weather-info">
+                        <ul>
+                            <li>Temp: <span id="temperature"></span></li>
+                            <li>Weather: <span id="conditions"></span></li>
+                            <li>Temp Range: <span id="tempMin"></span> / <span id="tempMax"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
