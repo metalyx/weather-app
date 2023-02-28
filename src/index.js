@@ -5,7 +5,7 @@ import './styles/error.scss';
 import './styles/geo.scss';
 import weatherContainerBCImage from './assets/weather-bg.jpg';
 import weatherAPI from './api/WeatherAPI';
-import Loader from './components/loader';
+import Loader from './components/Loader';
 
 const unknown = 'unknown';
 const cityNameRegExp = /^[a-z- ]+$/i;
